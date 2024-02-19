@@ -11,10 +11,10 @@
   },
   "name": "backend",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "listen.js",
   "scripts": {
-    "test": "jest app.test.js",
-    "prepare": "husky"
+    "start": "node listen.js",
+    "test": "jest app.test.js"
   },
   "keywords": [],
   "author": "",
