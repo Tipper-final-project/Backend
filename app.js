@@ -3,6 +3,8 @@ const {
   addWaiter,
   getWaiter,
   updateWaiter,
+  deleteWaiter,
+  getEndpoints,
 } = require("./MVC/controllers/app.controllers");
 
 const app = express();
@@ -11,11 +13,15 @@ app.use(express.json());
 app.post("/waiter", addWaiter);
 app.get("/waiter/:username", getWaiter);
 app.patch("/waiter/:username", updateWaiter);
+app.delete("/waiter/:username", deleteWaiter);
+app.get("/", getEndpoints);
 
 app.use((error, req, res, next) => {
-  if (error.msg === "user exists") {
+  if (error.msg === "username exists") {
     res.status(400).send(error);
   } else if (error.msg === "details required not completed") {
+    res.status(400).send(error);
+  } else if (error.msg === "email exists") {
     res.status(400).send(error);
   }
 
