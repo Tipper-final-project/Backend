@@ -1,5 +1,5 @@
 const app = require("./app");
-
-app.listen(() => {
-  console.log("we are live on 3000");
+const { PORT = 3001 } = process.env;
+app.listen(PORT, () => {
+  console.log("we are live on radio 3001");
 });
