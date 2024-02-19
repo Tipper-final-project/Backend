@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const {
   addWaiter,
   getWaiter,
@@ -9,6 +10,7 @@ const {
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.post("/waiter", addWaiter);
 app.get("/waiter/:username", getWaiter);
