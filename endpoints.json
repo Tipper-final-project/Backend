@@ -1,5 +1,6 @@
 {
   "GET /": { "description": "returns all the available endpoints" },
+
   "POST /waiter": {
     "description": "adds a new waiter",
     "requirements": {
@@ -9,12 +10,15 @@
       "bio": "i told you eric"
     }
   },
+
   "PATCH /waiter/username": {
     "description": "updates an existing user (email or workplace or username or bio)",
     "requirements": {
       "bio/email/username/workplace": "details"
     }
   },
+
   "DELETE /waiter/username": { "description": "removes the user's account" },
+
   "GET /waiter/username": { "description": "gets the waiters details" }
 }

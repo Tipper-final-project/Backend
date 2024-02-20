@@ -1,5 +1,6 @@
 const client = require("../../db/connection");
-const db = client.db("test_db");
+const dbString = process.env.NODE_ENV || "production";
+const db = client.db(`${dbString}_db`);
 const waiters = db.collection("waiters");
 const fs = require("fs/promises");
 
