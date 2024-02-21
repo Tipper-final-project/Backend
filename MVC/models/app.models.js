@@ -12,7 +12,10 @@ const postWaiter = async (data) => {
       typeof data.username !== "string" ||
       typeof data.email !== "string" ||
       typeof data.bio !== "string" ||
-      typeof data.workPlace !== "string"
+      typeof data.workPlace !== "string" ||
+      !data.hasOwnProperty("img") ||
+      typeof data.firstName !== "string" ||
+      typeof data.lastName !== "string"
     ) {
       return Promise.reject({ msg: "details required not completed" });
     }

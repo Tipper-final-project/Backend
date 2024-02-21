@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require("body-parser")
 const cors = require("cors");
 const {
   addWaiter,
@@ -9,7 +10,7 @@ const {
 } = require("./MVC/controllers/app.controllers");
 
 const app = express();
-app.use(express.json());
+app.use(bodyParser.json({ limit: '10mb' }));
 app.use(cors());
 
 app.post("/waiter", addWaiter);
