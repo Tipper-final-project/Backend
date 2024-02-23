@@ -2,6 +2,7 @@ const client = require("../../db/connection");
 const dbString = process.env.NODE_ENV || "production";
 const db = client.db(`${dbString}_db`);
 const waiters = db.collection("waiters");
+const payments = db.collection("payments")
 const fs = require("fs/promises");
 
 const postWaiter = async (data) => {
@@ -76,10 +77,21 @@ const fetchEndPoints = async () => {
   } catch (error) {}
 };
 
+const postPayment = async (data) => {
+  try {
+    await payments.insertOne(data);
+
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   postWaiter,
   fetchWaiter,
   patchWaiter,
   removeWaiter,
   fetchEndPoints,
+  postPayment
 };

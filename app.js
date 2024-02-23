@@ -6,7 +6,7 @@ const {
   getWaiter,
   updateWaiter,
   deleteWaiter,
-  getEndpoints,
+  getEndpoints, addPayment,
 } = require("./MVC/controllers/app.controllers");
 
 const app = express();
@@ -18,6 +18,7 @@ app.get("/waiter/:username", getWaiter);
 app.patch("/waiter/:username", updateWaiter);
 app.delete("/waiter/:username", deleteWaiter);
 app.get("/", getEndpoints);
+app.post("/payments", addPayment);
 
 app.use((error, req, res, next) => {
   if (error.msg === "username exists") {

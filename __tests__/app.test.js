@@ -113,4 +113,10 @@ describe("Tesing all the endpoints", () => {
       expect(endpoints).toEqual(availableEndpoints);
     });
   });
+  describe("POST /payments", () => {
+    test("201: posts a session ID", async () => {
+      const response = await request(app).post("/payments").send({sessionID: "cs_test_a14tI3fmmcCb5iPyyqlhs0R6yyktItkU5BeDABAB9ElQXAoUaeZwFn8e7G"})        
+      expect(response.status).toBe(201);
+    });
+});
 });

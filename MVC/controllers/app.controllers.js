@@ -4,6 +4,7 @@ const {
   patchWaiter,
   removeWaiter,
   fetchEndPoints,
+  postPayment,
 } = require("../models/app.models");
 
 const addWaiter = async (req, res, next) => {
@@ -56,10 +57,22 @@ const getEndpoints = async (req, res, next) => {
   }
 };
 
+const addPayment = async (req, res, next) => {
+  try {
+    const data = req.body;
+    const result = await postPayment(data);
+    console.log(data);
+    res.status(201).send({});
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   addWaiter,
   getWaiter,
   updateWaiter,
   deleteWaiter,
   getEndpoints,
+  addPayment
 };
