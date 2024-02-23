@@ -118,5 +118,13 @@ describe("Tesing all the endpoints", () => {
       const response = await request(app).post("/payments").send({sessionID: "cs_test_a14tI3fmmcCb5iPyyqlhs0R6yyktItkU5BeDABAB9ElQXAoUaeZwFn8e7G"})        
       expect(response.status).toBe(201);
     });
-});
+  });
+  describe("GET /payments", () => {
+    test("200: returns the available payments", async () => {
+      const response = await request(app).get("/payments")
+      response.body.payments.map((payment) => {
+      expect (typeof payment.sessionID).toBe("string")
+      })
+    });
+  });
 });

@@ -80,12 +80,20 @@ const fetchEndPoints = async () => {
 const postPayment = async (data) => {
   try {
     await payments.insertOne(data);
-
-    console.log(data);
   } catch (error) {
     console.log(error);
   }
 };
+
+const fetchPayment = async () => {
+  try {
+    const response = await payments.find({}).toArray();
+    if (response === null) return Promise.reject({ msg: "Not found" });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 module.exports = {
   postWaiter,
@@ -93,5 +101,6 @@ module.exports = {
   patchWaiter,
   removeWaiter,
   fetchEndPoints,
-  postPayment
+  postPayment,
+  fetchPayment
 };
