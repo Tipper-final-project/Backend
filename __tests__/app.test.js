@@ -24,6 +24,8 @@ describe("Tesing all the endpoints", () => {
         bio: "hi im user1 and I really need these tips for my startup",
         img_url:
           "https://static.wikia.nocookie.net/theregularshow/images/9/96/Teen_Mordecai.png/revision/latest?cb=20230930020729",
+        firstName: "user",
+        lastName: "test",
       });
       expect(response.status).toBe(201);
     });
@@ -115,16 +117,19 @@ describe("Tesing all the endpoints", () => {
   });
   describe("POST /payments", () => {
     test("201: posts a session ID", async () => {
-      const response = await request(app).post("/payments").send({sessionID: "cs_test_a14tI3fmmcCb5iPyyqlhs0R6yyktItkU5BeDABAB9ElQXAoUaeZwFn8e7G"})        
+      const response = await request(app).post("/payments").send({
+        sessionID:
+          "cs_test_a14tI3fmmcCb5iPyyqlhs0R6yyktItkU5BeDABAB9ElQXAoUaeZwFn8e7G",
+      });
       expect(response.status).toBe(201);
     });
   });
   describe("GET /payments", () => {
     test("200: returns the available payments", async () => {
-      const response = await request(app).get("/payments")
+      const response = await request(app).get("/payments");
       response.body.payments.map((payment) => {
-      expect (typeof payment.sessionID).toBe("string")
-      })
+        expect(typeof payment.sessionID).toBe("string");
+      });
     });
   });
 });
