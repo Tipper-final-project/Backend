@@ -2,7 +2,7 @@ const client = require("../../db/connection");
 const dbString = process.env.NODE_ENV || "production";
 const db = client.db(`${dbString}_db`);
 const waiters = db.collection("waiters");
-const payments = db.collection("payments")
+const payments = db.collection("payments");
 const fs = require("fs/promises");
 
 const postWaiter = async (data) => {
@@ -14,7 +14,7 @@ const postWaiter = async (data) => {
       typeof data.email !== "string" ||
       typeof data.bio !== "string" ||
       typeof data.workPlace !== "string" ||
-      !data.hasOwnProperty("img") ||
+      !data.hasOwnProperty("img_url") ||
       typeof data.firstName !== "string" ||
       typeof data.lastName !== "string"
     ) {
@@ -93,7 +93,7 @@ const fetchPayment = async () => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 module.exports = {
   postWaiter,
@@ -102,5 +102,5 @@ module.exports = {
   removeWaiter,
   fetchEndPoints,
   postPayment,
-  fetchPayment
+  fetchPayment,
 };
