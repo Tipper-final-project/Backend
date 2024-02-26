@@ -132,4 +132,16 @@ describe("Tesing all the endpoints", () => {
       });
     });
   });
+  describe("GET /check:username ", () => {
+    test("200: when a username is found", async () => {
+      const response = await request(app).get("/check/user2");
+      expect(response.status).toBe(200);
+      expect(response.body.userExists).toBe(true);
+    });
+    test("200: when a username does not exist", async () => {
+      const response = await request(app).get("/check/lee");
+      expect(response.status).toBe(200);
+      expect(response.body.userExists).toBe(false);
+    });
+  });
 });

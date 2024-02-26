@@ -1,3 +1,4 @@
+const { find } = require("../../db/data/testData");
 const {
   postWaiter,
   fetchWaiter,
@@ -5,7 +6,8 @@ const {
   removeWaiter,
   fetchEndPoints,
   postPayment,
-  fetchPayment
+  fetchPayment,
+  findUser,
 } = require("../models/app.models");
 
 const addWaiter = async (req, res, next) => {
@@ -66,7 +68,7 @@ const addPayment = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
 const getPayment = async (req, res, next) => {
   try {
@@ -75,7 +77,17 @@ const getPayment = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
+
+const checkUser = async (req, res, next) => {
+  try {
+    const { username } = req.params;
+    const result = await findUser(username);
+    res.status(200).send({ userExists: result });
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = {
   addWaiter,
@@ -84,5 +96,6 @@ module.exports = {
   deleteWaiter,
   getEndpoints,
   addPayment,
-  getPayment
+  getPayment,
+  checkUser,
 };

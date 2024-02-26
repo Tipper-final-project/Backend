@@ -1,16 +1,19 @@
 const express = require("express");
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const {
   addWaiter,
   getWaiter,
   updateWaiter,
   deleteWaiter,
-  getEndpoints, addPayment, getPayment,
+  getEndpoints,
+  addPayment,
+  getPayment,
+  checkUser,
 } = require("./MVC/controllers/app.controllers");
 
 const app = express();
-app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.json({ limit: "10mb" }));
 app.use(cors());
 
 app.post("/waiter", addWaiter);
@@ -20,6 +23,7 @@ app.delete("/waiter/:username", deleteWaiter);
 app.get("/", getEndpoints);
 app.post("/payments", addPayment);
 app.get("/payments", getPayment);
+app.get("/check/:username", checkUser);
 
 app.use((error, req, res, next) => {
   if (error.msg === "username exists") {

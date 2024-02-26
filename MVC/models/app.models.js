@@ -95,6 +95,16 @@ const fetchPayment = async () => {
   }
 };
 
+const findUser = async (username) => {
+  try {
+    const response = await waiters.findOne({ username });
+    if (response) return true;
+    else return false;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   postWaiter,
   fetchWaiter,
@@ -103,4 +113,5 @@ module.exports = {
   fetchEndPoints,
   postPayment,
   fetchPayment,
+  findUser,
 };
