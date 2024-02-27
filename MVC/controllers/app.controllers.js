@@ -8,6 +8,7 @@ const {
   fetchPayment,
   findUser,
   postNewMessage,
+  findMessages,
 } = require("../models/app.models");
 
 const addWaiter = async (req, res, next) => {
@@ -100,6 +101,16 @@ const addMessage = async (req, res, next) => {
   }
 };
 
+const getMessages = async (req, res, next) => {
+  try {
+    const { username } = req.params;
+    const messages = await findMessages(username);
+    res.status(200).send(messages);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   addWaiter,
   getWaiter,
@@ -110,4 +121,5 @@ module.exports = {
   getPayment,
   checkUser,
   addMessage,
+  getMessages,
 };

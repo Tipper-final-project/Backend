@@ -107,11 +107,32 @@ const findUser = async (username) => {
 
 const postNewMessage = async (username, message) => {
   try {
+    if (
+      typeof message.recieved !== "number" ||
+      typeof message.date !== "string"
+    ) {
+      return Promise.reject({ msg: "details required not completed" });
+    }
     const messageStorage = db.collection(`${username}'s messages`);
     await messageStorage.insertOne(message);
   } catch (error) {
     console.log(error);
   }
+};
+
+const findMessages = async (username) => {
+  try {
+    const waiterExists = await waiters.findOne({ username });
+    if (waiterExists === null)
+      return Promise.reject({ msg: "user does not exist" });
+    const messageStorage = db.collection(`${username}'s messages`);
+    const messages = await messageStorage.find({});
+    const result = [];
+    for await (const message of messages) {
+      result.push(message);
+    }
+    return { messages: result };
+  } catch (error) {}
 };
 
 module.exports = {
@@ -124,4 +145,5 @@ module.exports = {
   fetchPayment,
   findUser,
   postNewMessage,
+  findMessages,
 };
