@@ -4,11 +4,14 @@ const client = require("../db/connection");
 const data = require("../db/data/testData");
 const db = client.db("test_db");
 const waiters = db.collection("waiters");
+const messages = db.collection("user2's messages");
 const fs = require("fs/promises");
 
 beforeAll(async () => {
   await waiters.drop();
+  await messages.drop();
   await db.createCollection("waiters");
+  await db.createCollection("user2's messages");
   await waiters.insertMany(data);
 });
 afterAll(async () => {
@@ -142,6 +145,37 @@ describe("Tesing all the endpoints", () => {
       const response = await request(app).get("/check/lee");
       expect(response.status).toBe(200);
       expect(response.body.userExists).toBe(false);
+    });
+  });
+  describe("POST /messages/:username", () => {
+    test("200: posts a message to the db", async () => {
+      const response = await request(app)
+        .post("/messages/user2")
+        .send({ date: new Date(), recieved: 10 });
+
+      expect(response.status).toBe(201);
+    });
+    test("400: when posting a messages without required fields", async () => {
+      const response = await request(app)
+        .post("/messages/eileen")
+        .send({ recieved: 20 });
+      expect(response.status).toBe(400);
+      expect(response.body.msg).toBe("details required not completed");
+    });
+  });
+  describe("GET /messages/:username", () => {
+    test("200: gets a messages from the db", async () => {
+      const response = await request(app).get("/messages/user2");
+      const { messages } = response.body;
+      expect(response.status).toBe(200);
+      expect(Array.isArray(messages)).toBe(true);
+      expect(messages[0].recieved).toBe(10);
+    });
+    test("404: when trying to get messages but a user doesnt exist", async () => {
+      const response = await request(app).get("/messages/amir");
+      const { msg } = response.body;
+      expect(response.status).toBe(404);
+      expect(msg).toBe("user does not exist");
     });
   });
 });

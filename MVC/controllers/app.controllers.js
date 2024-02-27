@@ -1,4 +1,3 @@
-const { find } = require("../../db/data/testData");
 const {
   postWaiter,
   fetchWaiter,
@@ -8,6 +7,8 @@ const {
   postPayment,
   fetchPayment,
   findUser,
+  postNewMessage,
+  findMessages,
 } = require("../models/app.models");
 
 const addWaiter = async (req, res, next) => {
@@ -89,6 +90,27 @@ const checkUser = async (req, res, next) => {
   }
 };
 
+const addMessage = async (req, res, next) => {
+  try {
+    const { username } = req.params;
+    const message = req.body;
+    const result = await postNewMessage(username, message);
+    res.status(201).send({});
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getMessages = async (req, res, next) => {
+  try {
+    const { username } = req.params;
+    const messages = await findMessages(username);
+    res.status(200).send(messages);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   addWaiter,
   getWaiter,
@@ -98,4 +120,6 @@ module.exports = {
   addPayment,
   getPayment,
   checkUser,
+  addMessage,
+  getMessages,
 };
