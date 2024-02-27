@@ -10,6 +10,7 @@ const {
   addPayment,
   getPayment,
   checkUser,
+  addMessage,
 } = require("./MVC/controllers/app.controllers");
 
 const app = express();
@@ -24,6 +25,7 @@ app.get("/", getEndpoints);
 app.post("/payments", addPayment);
 app.get("/payments", getPayment);
 app.get("/check/:username", checkUser);
+app.post("/messages/:username", addMessage);
 
 app.use((error, req, res, next) => {
   if (error.msg === "username exists") {

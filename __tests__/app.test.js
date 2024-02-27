@@ -4,10 +4,12 @@ const client = require("../db/connection");
 const data = require("../db/data/testData");
 const db = client.db("test_db");
 const waiters = db.collection("waiters");
+// const messages = db.collection("eileen's messages");
 const fs = require("fs/promises");
 
 beforeAll(async () => {
   await waiters.drop();
+  // await messages.drop();
   await db.createCollection("waiters");
   await waiters.insertMany(data);
 });
@@ -142,6 +144,15 @@ describe("Tesing all the endpoints", () => {
       const response = await request(app).get("/check/lee");
       expect(response.status).toBe(200);
       expect(response.body.userExists).toBe(false);
+    });
+  });
+  describe("POST /messages/:username", () => {
+    test("200: posts a message to the db", async () => {
+      const response = await request(app)
+        .post("/messages/eileen")
+        .send({ date: new Date(), recieved: 10 });
+
+      expect(response.status).toBe(201);
     });
   });
 });

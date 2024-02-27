@@ -105,6 +105,15 @@ const findUser = async (username) => {
   }
 };
 
+const postNewMessage = async (username, message) => {
+  try {
+    const messageStorage = db.collection(`${username}'s messages`);
+    await messageStorage.insertOne(message);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   postWaiter,
   fetchWaiter,
@@ -114,4 +123,5 @@ module.exports = {
   postPayment,
   fetchPayment,
   findUser,
+  postNewMessage,
 };
