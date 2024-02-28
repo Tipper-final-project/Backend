@@ -17,16 +17,14 @@ $ https://github.com/Tipper-final-project/Backend
 2. Install Packages & Dependencies
    This project uses [node](http://nodejs.org) version v20.0.0 and [npm](https://npmjs.com) version 9.6.4
    Go check them out if you don't have them locally installed.
+   You can run the command below to install all the necessary packages.
 
 ```sh
 $ npm install
 ```
 
 ## Usage
-
-```sh
-$ npm run start
-```
+You will need to make a database with mongodb and once you have made one you will need to get a connection string which is used in the environment.
 
 ## ** IMPORTANT **
 
@@ -34,17 +32,8 @@ You will need to create the necessary environment variables in the top level of 
 
 Please create the files:
 
-1. .env.local
-2. .env.production
-3. .env.test
-
----------------------------------------------------------
-
-Inside the .env.local file, add the following variable:
-
-```sh
-NEXT_PUBLIC_SECRET=
-```
+1. .env.production
+2. .env.test
 
 ---------------------------------------------------------
 
@@ -55,14 +44,6 @@ DATABASE_URL={ databse url }
 ```
 
 Once the variables have been created, you will need to double check that these .env files are .gitignored. If not, add them to the .gitignored file by writing under node_modules: .env.*
-
-## Run Project
-
-You can now run the project:
-
-```sh
-$ npm run dev
-```
 
 ## Run Tests
 
