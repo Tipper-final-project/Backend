@@ -20,5 +20,10 @@
 
   "DELETE /waiter/username": { "description": "removes the user's account" },
 
-  "GET /waiter/username": { "description": "gets the waiters details" }
+  "GET /waiter/username": { "description": "gets the waiters details" },
+  "GET /check/:username": { "description": "checks if a username already exists in the db and returns a boolean" },
+  "POST /messages/:username": { "desription": "adds a message to the users messages in the db", "requirements": {"recieved": 5,"date": "29-02-2024 04:04"}},
+  "GET /messages/:username": { "description": "gets all the messages from that user and returns them in an array", "example response": [{"recieved": 5,"date": "29-02-2024 04:04"}]},
+  "GET /payments": { "description": "gets all the sessionId's from stripe" },
+  "POST /payments": { "description": "posts a sessionId from stripe" },
 }
