@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to Tipper! 👋</h1>
 
-### 🏠 [Hosted on](https://tipper-api-xzkf.onrender.com/)
+### [Hosted on](https://tipper-api-xzkf.onrender.com/)
 
 Our cashless tipping web-app! This API allows you to register an account with Tipper, access your account and edit information, as well as receiving messages for any payments.
 
